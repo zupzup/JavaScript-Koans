@@ -115,3 +115,17 @@ test("new keyword", function(assert) {
     ok(__ === person.name, "What is the name of the person?");
     ok(__ === name, "Has the name variable changed?");
 });
+
+test("overly complicated bind magic",function(){
+    function someFunc(a, b, c, d){
+        return this + a(b) + c(d);
+    }
+
+    var result = someFunc.bind("I", function(b) {
+        return this + b; 
+    }.bind(" am ", "a"), "hello", function(d) {
+        return (this + d).split("").reverse().join("");
+    }.bind("dog tpircs"), "avaj ")();
+
+    ok(__ === result, "what is the value of result?");
+});

@@ -77,16 +77,16 @@ test("function properties",function(){
 });
 
 
-test("overly complicated bind magic",function(){
-    function someFunc(a, b, c, d){
-        return this + a(b) + c(d);
+test("complex example with functions",function(){
+    function someFunc(a, b, c, d, e, f){
+        return a(b, c) + d(e, f);
     }
 
-    var result = someFunc.bind("I", function(b) {
-        return this + b; 
-    }.bind(" am ", "a"), "hello", function(d) {
-        return (this + d).split("").reverse().join("");
-    }.bind("dog tpircs"), "avaj ")();
+    var result = someFunc(function(a, b) {
+        return a + b;
+    }, "I", " am a ", function(a, b) {
+        return (a + b).split("").reverse().join("");
+    }, "dog tpircs", "avaj");
 
     ok(__ === result, "what is the value of result?");
 });
