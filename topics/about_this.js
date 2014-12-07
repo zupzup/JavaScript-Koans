@@ -121,11 +121,11 @@ test("overly complicated bind magic",function(){
         return this + a(b) + c(d);
     }
 
-    var result = someFunc.bind("I", function(b) {
+    var result = someFunc.bind("this", function(b) {
         return this + b; 
-    }.bind(" am ", "a"), "hello", function(d) {
+    }.bind(" was ", " too "), "hello", function(d) {
         return (this + d).split("").reverse().join("");
-    }.bind("dog tpircs"), "avaj ")();
+    }.bind("em rof"), " ysae")();
 
     ok(__ === result, "what is the value of result?");
 });
