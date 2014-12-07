@@ -6,39 +6,112 @@ test("'this' inside a method", function () {
 		intro: function () {
 			return "Hello, my name is " + this.__;
 		} 
-	}
-	equal(person.intro(), "Hello, my name is bob", "If an object has a method can you access properties inside it?");
+	};
+
+	ok(person.intro() === "Hello, my name is bob", "If an object has a method can you access properties inside it?");
 });
 
 test("'this' on unattached function", function () {
 	var person = {
-		globalName: 'bob',
+		unattachedName: 'bob',
 		intro: function () {
-			return "Hello, my name is " + this.globalName;
+			return "Hello, my name is " + this.unattachedName;
 		} 
-	}
+	};
 
 	var alias = person.intro;
 	
 	// if the function is not called as an object property 'this' is the global context 
 	// (window in a browser). This is an example. Please do not do this in practise.
 	window.__ = 'Peter';
-	equal(alias(), "Hello, my name is Peter", "What does 'this' refer to when it is not part of an object?");
+	ok(alias() === "Hello, my name is Peter", "What does 'this' refer to when it is not part of an object?");
+});
+
+asyncTest("this with setTimeout", function(assert) {
+    var name = 'frank';
+
+    var person = {
+        name: 'bob',
+        intro: function () {
+            ok(__ === this.name, "What does 'this' refer?");
+            start();
+        }
+    };
+
+    setTimeout(person.intro, 1 );
 });
 
 test("'this' set explicitly", function () {
 	var person = {
 		name: 'bob',
-		intro: function () {
-			return "Hello, my name is " + this.name;
-		} 
-	}
+        intro: function () {
+            return "Hello, my name is " + this.name;
+        }
+	};
 
 	// calling a function with 'call' lets us assign 'this' explicitly
 	var message = person.intro.call({__: "Frank"});
 	equal(message, "Hello, my name is Frank", "What does 'this' refer to when you use the 'call()' method?");
 });
 
-// extra credit: underscore.js has a 'bind' function http://documentcloud.github.com/underscore/#bind
-// read the source and see how it is implemented
+asyncTest("bound this", function(assert) {
+    var name = 'frank';
 
+    var person = {
+        name: 'bob',
+        intro: function () {
+            ok(__ === this.name, "What does 'this' refer?");
+            start();
+        }
+    };
+
+    var intro = person.intro.bind(person);
+
+    setTimeout(intro, 1 );
+});
+
+test("bound this with explicit call", function(assert) {
+    var name = 'frank';
+
+    var person = {
+        name: 'bob',
+        intro: function () {
+            ok(__ === this.name, "What does 'this' refer?");
+            start();
+        }
+    };
+
+    var intro = person.intro.bind(person);
+
+    intro.call({name: 'test'});
+});
+
+test("double bound this", function(assert) {
+    var name = 'frank';
+
+    var person = {
+        name: 'bob',
+        intro: function () {
+            ok(__ === this.name, "What does 'this' refer?");
+        }
+    };
+
+    var intro = person.intro.bind(person);
+
+    var doubleBoundIntro = intro.bound({name: 'test'});
+
+    doubleBoundIntro();
+});
+
+test("new keyword", function(assert) {
+    var name = 'frank';
+
+    function Person (name) {
+        this.name = name;
+    }
+
+    var person = new Person('bob');
+
+    ok(__ === person.name, "What is the name of the person?");
+    ok(__ === name, "Has the name variable changed?");
+});
