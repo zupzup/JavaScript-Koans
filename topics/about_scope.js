@@ -2,12 +2,13 @@ module("About Scope (topics/about_scope.js)");
 
 variable1 = 77;
 
-test("scope example 1", function() {
+test("global variables", function() {
     // defined returns true if the variable is defined in the scope, else false
     ok(__ === defined(variable1), 'is variable1 defined in this scope?');
+    ok(__ === defined(window.variable1), 'is variable1 defined on the window object?');
 });
 
-test("scope example 2", function() {
+test("function scope", function() {
     var outerVariable = "outer";
 
     (function() {
@@ -20,7 +21,7 @@ test("scope example 2", function() {
     ok(__ === defined(innerVariable), 'is innerVariable defined in this scope?');
 });
 
-test("scope example 3", function() {
+test("block scope", function() {
     var outerVariable = "outer";
 
     if (outerVariable) {
@@ -33,7 +34,7 @@ test("scope example 3", function() {
     ok(__ === defined(innerVariable), 'is innerVariable defined in this scope?');
 });
 
-test("scope example 4", function() {
+test("for loop scope", function() {
     for (var i=0; i<10; i++) {
         // doing something
     }
@@ -41,7 +42,7 @@ test("scope example 4", function() {
     ok(__ === defined(i), 'is i defined in this scope?');
 });
 
-test("scope example 5", function() {
+test("functions calling functions", function() {
     function foo() {
         ok(__ === a, 'what is the value of a?');
     }
@@ -56,7 +57,7 @@ test("scope example 5", function() {
     bar();
 });
 
-test("scope example 6", function () {
+test("functions inside functions calling functions inside for loops", function () {
     var res = 0;
 
     function foo() {
@@ -74,7 +75,7 @@ test("scope example 6", function () {
     ok(__ === res, 'what is the final value of res?');
 });
 
-test("scope example 7", function () {
+test("Outside scope", function () {
     var res = 0;
 
     function foo() {
@@ -96,7 +97,7 @@ test("scope example 7", function () {
     ok(__ === defined(bar), 'is a defined in this scope?');
 });
 
-test("scope example 8", function () {
+test("For loops again", function () {
     var res = 0;
 
     function foo() {
@@ -115,7 +116,7 @@ test("scope example 8", function () {
     ok(__ === res, 'what is the final value of res?');
 });
 
-test("scope example 9", function () {
+test("What the f***", function () {
     try{
         throw 2
     } catch(a) {
