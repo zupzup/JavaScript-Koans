@@ -116,7 +116,7 @@ test("For loops again", function () {
     ok(__ === res, 'what is the final value of res?');
 });
 
-test("What the f***", function () {
+test("Try catch", function () {
     try{
         throw 2
     } catch(a) {
@@ -155,6 +155,6 @@ test("why you shouldn't use with", function () {
     ok(__ === defined(a), 'is a defined in global scope?');
 
     foo( o2 );
-    ok(__ === o1.a, 'what is o2.a?');
+    ok(__ === o2.a, 'what is o2.a?');
     ok(__ === defined(a), 'is a defined in global scope?');
 });

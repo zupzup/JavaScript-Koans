@@ -1,6 +1,6 @@
 /* jshint eqeqeq: false, unused: false, eqnull: true, undef: false, latedef: false  */
 /* jshint -W083 */
-module("About Functions And Closure (topics/about_functions_and_closure.js)");
+module("About Closure (topics/about_closure.js)");
 
 test("simple closure", function() {
     var result = "a";
@@ -39,12 +39,12 @@ test("module pattern", function() {
 asyncTest("closure with async functions", function(assert) {
     var sum = 0;
     for (var i=1; i<=5; i++) {
-        setTimeout( function timer(){
+        setTimeout( function timer1(){
             sum += i;
         }, i*5 );
     }
 
-    setTimeout( function timer(){
+    setTimeout( function timer2(){
         ok(__ === sum, 'what is the value of sum?');
         start();
     }, 26 );
@@ -54,12 +54,12 @@ asyncTest("closure at for loop with explicit assignment", function(assert) {
     var sum = 0;
     for (var i=1; i<=5; i++) {
         var j = i;
-        setTimeout( function timer(){
+        setTimeout( function timer1(){
             sum += j;
         }, i*5 );
     }
 
-    setTimeout( function timer(){
+    setTimeout( function timer2(){
         ok(__ === sum, 'what is the value of sum?');
         start();
     }, 26 );
@@ -70,13 +70,13 @@ asyncTest("IIFE",function(){
     for (var i=1; i<=5; i++) {
         (function(){
             var j = i;
-            setTimeout( function timer(){
+            setTimeout( function timer1(){
                 sum += j;
             }, j*5 );
         })();
     }
 
-    setTimeout( function timer(){
+    setTimeout( function timer2(){
         ok(__ === sum, 'what is the value of sum?');
         start();
     }, 26 );
@@ -86,13 +86,13 @@ asyncTest("passing values on IIFE",function(){
     var sum = 0;
     for (var i=1; i<=5; i++) {
         (function(j){
-            setTimeout( function timer(){
+            setTimeout( function timer1(){
                 sum += j;
             }, j*5 );
         })( i );
     }
 
-    setTimeout( function timer(){
+    setTimeout( function timer2(){
         ok(__ === sum, 'what is the value of sum?');
         start();
     }, 26 );
