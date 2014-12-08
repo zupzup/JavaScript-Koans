@@ -3,12 +3,24 @@
 module("About Closure (topics/about_closure.js)");
 
 test("simple closure", function() {
-    var result = "a";
-    function changeResult() {
-        result = "b";
+    function foo () {
+        var result = "a";
+        function changeResult() {
+            return result;
+        }
+
+        ok(__ === result, 'result is available here');
+
+        return changeResult;
     }
-    changeResult();
-    ok(__ === result, 'what is the value of result?');
+
+    var changeResult = foo();
+
+    ok(__ === defined(result), 'its not in this scope');
+
+    var closuredResult = changeResult();
+
+    ok(__ === closuredResult, 'but its not gone because of the closure');
 });
 
 test("module pattern", function() {
