@@ -18,11 +18,11 @@ test("basic hoisting", function() {
     var foo = 5;
 });
 
-var bar = 2;
+var barryglobal = 2;
 test("basic hoisting with globals", function() {
-    ok(bar === __, 'what value does bar have?');
+    ok(barryglobal === __, 'what value does bar have?');
 
-    bar = 5;
+    barryglobal = 5;
 });
 
 
