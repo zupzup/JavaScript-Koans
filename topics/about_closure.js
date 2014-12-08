@@ -1,10 +1,12 @@
+/* jshint eqeqeq: false, unused: false, eqnull: true, undef: false, latedef: false  */
+/* jshint -W083 */
 module("About Functions And Closure (topics/about_functions_and_closure.js)");
 
 test("simple closure", function() {
     var result = "a";
     function changeResult() {
         result = "b";
-    };
+    }
     changeResult();
     ok(__ === result, 'what is the value of result?');
 });
@@ -80,7 +82,7 @@ asyncTest("IIFE",function(){
     }, 26 );
 });
 
-test("passing values on IIFE",function(){
+asyncTest("passing values on IIFE",function(){
     var sum = 0;
     for (var i=1; i<=5; i++) {
         (function(j){
