@@ -15,37 +15,37 @@ test("equality with type coercion", function() {
     if(undefIsNull == null) {
         undefIsNull = true; 
     }
-    equal(__, undefIsNull, 'is undefined equal to null?');
+    ok(__ === undefIsNull, 'is undefined equal to null?');
 });
 
 
 test("truthyness of positive numbers", function() {
     var oneIsTruthy = 1 ? true : false;
-    equal(__, oneIsTruthy, 'is one truthy?');
+    ok(__ === oneIsTruthy, 'is one truthy?');
 });
 
 test("truthyness of negative numbers", function() {
     var negativeOneIsTruthy = -1 ? true : false;
-    equal(__, negativeOneIsTruthy, 'is -1 truthy?');
+    ok(__ === negativeOneIsTruthy, 'is -1 truthy?');
 });
 
 test("truthyness of zero", function() {
     var zeroIsTruthy = 0 ? true : false;
-    equal(__, zeroIsTruthy, 'is 0 truthy?');
+    ok(__ === zeroIsTruthy, 'is 0 truthy?');
 });
 
 
 test("casting to boolean", function() {
     var castedTrue = !!"false" ? true : false;
-    equal(__, castedTrue, 'is this string casted to boolean truthy?');
+    ok(__ === castedTrue, 'is this string casted to boolean truthy?');
 });
 
 test("arrays of arrays truthyness", function() {
     var isThisTrue = [[]] ? true : false;
-    equal(__, isThisTrue, 'is an empty array within an array truthy?');
+    ok(__ === isThisTrue, 'is an empty array within an array truthy?');
 });
 
 test("NaN equality", function() {
     var isNaNEqualToNaN = NaN === NaN;
-    equal(__, isNaNEqualToNaN, 'is an array within an array equal truthy?');
+    ok(__ === isNaNEqualToNaN, 'is an array within an array equal truthy?');
 });
