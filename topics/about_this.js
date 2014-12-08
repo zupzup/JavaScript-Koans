@@ -77,7 +77,6 @@ test("bound this with explicit call", function(assert) {
         name: 'bob',
         intro: function () {
             ok(__ === this.name, "What does 'this' refer?");
-            start();
         }
     };
 
@@ -123,7 +122,7 @@ test("overly complicated bind magic",function(){
 
     var result = someFunc.bind("this", function(b) {
         return this + b; 
-    }.bind(" was ", " too "), "hello", function(d) {
+    }.bind(" was", " too "), "hello", function(d) {
         return (this + d).split("").reverse().join("");
     }.bind("em rof"), " ysae")();
 

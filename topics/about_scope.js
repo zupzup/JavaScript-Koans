@@ -91,10 +91,10 @@ test("Outside scope", function () {
     foo();
 
     ok(__ === defined(a), 'is a defined in this scope?');
-    ok(__ === defined(b), 'is a defined in this scope?');
-    ok(__ === defined(c), 'is a defined in this scope?');
-    ok(__ === defined(foo), 'is a defined in this scope?');
-    ok(__ === defined(bar), 'is a defined in this scope?');
+    ok(__ === defined(b), 'is b defined in this scope?');
+    ok(__ === defined(c), 'is c defined in this scope?');
+    ok(__ === defined(foo), 'is foo defined in this scope?');
+    ok(__ === defined(bar), 'is bar defined in this scope?');
 });
 
 test("For loops again", function () {
